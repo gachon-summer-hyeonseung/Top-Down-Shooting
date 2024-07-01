@@ -44,6 +44,7 @@ public class Pool
         if (size != 0) throw new Exception("Pool is full");
 
         T component = CreateObject<T>();
+        ActivateObject(component);
         pool.Add(component);
 
         return component;
@@ -65,7 +66,7 @@ public class Pool
     {
         GameObject obj = Instantiate(component.gameObject, container);
         T createdComponent = obj.GetComponent<T>();
-        pool.Add(createdComponent);
+        createdComponent.OnObjectCreated();
 
         return createdComponent;
     }

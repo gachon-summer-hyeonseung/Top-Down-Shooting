@@ -5,10 +5,21 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
+    public static PoolManager Instance { get; private set; }
+
     [SerializeField] Pool[] pools;
 
     void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         foreach (Pool pool in pools)
         {
             pool.Init();
