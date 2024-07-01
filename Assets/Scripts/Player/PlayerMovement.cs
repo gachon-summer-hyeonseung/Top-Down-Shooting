@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour, IPoolObject
     {
         if (moveDirection == Vector2.zero) return;
 
-        transform.Translate((Vector3)moveDirection * Time.deltaTime * moveSpeed);
+        transform.Translate(moveSpeed * Time.deltaTime * (Vector3)moveDirection);
     }
 
     void OnMove(InputValue value)
