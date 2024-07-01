@@ -7,18 +7,12 @@ public class PoolManager : MonoBehaviour
 {
     [SerializeField] Pool[] pools;
 
-    private
-
-    void Start()
+    void Awake()
     {
         foreach (Pool pool in pools)
         {
             pool.Init();
         }
-
-        PlayerMovement test = GetByType<PlayerMovement>();
-        Debug.Log(test);
-        ReturnByType("Player", test);
     }
 
     public T GetByType<T>() where T : Component, IPoolObject
