@@ -25,22 +25,27 @@ public class Bullet : MonoBehaviour, IPoolObject
         this.direction = direction;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void TriggerAction(Collider2D other)
     {
-        if (other.CompareTag("Wall"))
+        if (other.CompareTag("Enemy"))
         {
+            other.GetComponent<Enemy>().DecreaseHealth(1);
             PoolManager.Instance.ReturnByType(this);
         }
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Wall")) PoolManager.Instance.ReturnByType(this);
+        else TriggerAction(other);
+    }
+
     public void OnObjectCreated()
     {
-        Debug.Log("Object created");
     }
 
     public void OnObjectActivated()
     {
-        Debug.Log("Object activated");
         direction = Vector2.zero;
     }
 }
