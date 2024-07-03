@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IPoolObject
 {
+    public string idName;
     [SerializeField] private int health = 2;
 
     private EnemyMovement enemyMovement;
@@ -25,8 +26,9 @@ public class Enemy : MonoBehaviour, IPoolObject
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerController>().DecreaseHealth(1);
-            PoolManager.Instance.ReturnByType(this);
+            EnemyManager.Instance.EnemyDead(this);
         }
+        else if (other.CompareTag("Wall")) EnemyManager.Instance.EnemyDead(this);
     }
 
     public void OnObjectCreated()

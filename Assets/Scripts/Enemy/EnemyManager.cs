@@ -7,9 +7,6 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager Instance { get; private set; }
 
     [SerializeField] private float spawnRange = 2.0f;
-    [SerializeField] private float spawnTime = 3.0f;
-
-    private Coroutine createEnemyCoroutine;
 
     private void Awake()
     {
@@ -17,24 +14,35 @@ public class EnemyManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartSpawnEnemy(StageEnemyData enemyData)
     {
-        createEnemyCoroutine = StartCoroutine(IECreateEnemy());
+        StartCoroutine(IECreateEnemy(enemyData));
+        // switch (enemyData.enemyId)
+        // {
+        //     case (int)EnemyType.Default:
+        //         StartCoroutine(IECreateEnemy<Enemy>(enemyData.spawnStartTime, enemyData.spawnInterval, enemyData.spawnCount));
+        //         break;
+        //     case (int)EnemyType.Second:
+        //         StartCoroutine(IECreateEnemy<Enemy>(enemyData.spawnStartTime, enemyData.spawnInterval, enemyData.spawnCount));
+        //         break;
+        // }
     }
 
-    IEnumerator IECreateEnemy()
+    IEnumerator IECreateEnemy(StageEnemyData enemyData)
     {
-        while (true)
+        yield return new WaitForSeconds(enemyData.spawnStartTime);
+
+        for (int i = 0; i < enemyData.spawnCount; i++)
         {
-            yield return new WaitForSeconds(spawnTime);
-            Enemy enemy = PoolManager.Instance.GetByType<Enemy>();
+            Enemy enemy = PoolManager.Instance.GetByType<Enemy>(enemyData.enemyId - 1);
             enemy.SetPosition(new Vector3(Random.Range(-spawnRange, spawnRange), 6.0f, 0.0f));
+            yield return new WaitForSeconds(enemyData.spawnInterval);
         }
     }
 
     public void EnemyDead(Enemy enemy)
     {
-        PoolManager.Instance.ReturnByType(enemy);
+        PoolManager.Instance.ReturnByType(enemy.idName, enemy);
+        StageManager.Instance.ReduceEnemyCount();
     }
 }
