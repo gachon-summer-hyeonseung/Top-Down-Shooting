@@ -17,5 +17,10 @@ public class Bullet : BaseBullet
             other.GetComponent<Enemy>().DecreaseHealth(1);
             PoolManager.Instance.ReturnByType(this);
         }
+        else if (other.CompareTag("Boss"))
+        {
+            other.GetComponent<Boss>().DecreaseHealth(1);
+            PoolManager.Instance.ReturnByType(this);
+        }
     }
 }

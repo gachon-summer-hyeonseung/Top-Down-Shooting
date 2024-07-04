@@ -57,4 +57,12 @@ public class EnemyManager : MonoBehaviour
         PoolManager.Instance.ReturnByType(enemy.idName, enemy);
         StageManager.Instance.ReduceEnemyCount();
     }
+
+    public void SpawnBoss(StageBossData bossData)
+    {
+        Boss boss = PoolManager.Instance.GetByType<Boss>();
+        boss.SetPosition(new Vector3(0.0f, 3.0f, 0.0f));
+        boss.SetPattern(bossData.patternId);
+        boss.Run();
+    }
 }

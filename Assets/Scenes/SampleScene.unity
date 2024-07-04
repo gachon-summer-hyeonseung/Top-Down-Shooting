@@ -589,6 +589,14 @@ MonoBehaviour:
     component: {fileID: 1815855428265032956, guid: 9b36d150027bc4c8a90dc14c872eddd9, type: 3}
     size: 0
     container: {fileID: 699246759}
+  - name: Boss
+    component: {fileID: 979482710584461036, guid: f310dea97ade24830a2923deb729e076, type: 3}
+    size: 0
+    container: {fileID: 699246759}
+  - name: Boss Bullet
+    component: {fileID: 3968671979806196450, guid: 9c2b2ca31e5ed4f2c992b45db403e956, type: 3}
+    size: 0
+    container: {fileID: 858295429}
 --- !u!1 &699246758
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,6 +46,11 @@ public class StageManager : MonoBehaviour
     {
         currentEnemyCount--;
 
-        if (currentEnemyCount <= 0) StartStage(currentStageData.stageId + 1);
+        if (currentEnemyCount <= 0) EnemyManager.Instance.SpawnBoss(currentStageData.boss);
+    }
+
+    public void BossDead()
+    {
+        StartStage(currentStageData.stageId + 1);
     }
 }
