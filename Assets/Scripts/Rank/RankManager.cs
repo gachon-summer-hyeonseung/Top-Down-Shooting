@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -21,6 +22,29 @@ public class RankManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+    }
+
+    public void GetRank(int page, int limit, Action<List<RankData>> callback)
+    {
+        StartCoroutine(IEGetRankData(page, limit, callback));
+    }
+
+    IEnumerator IEGetRankData(int page, int limit, Action<List<RankData>> callback)
+    {
+        string url = "http://localhost:3000/rank?page=" + page + "&limit=" + limit;
+        var req = UnityWebRequest.Get(url);
+        yield return req.SendWebRequest();
+
+        if (req.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log("Error While Sending: " + req.error);
+        }
+        else
+        {
+            Debug.Log("Received: " + req.downloadHandler.text);
+            var rankDatas = JsonHelper.FromJson<RankData>(req.downloadHandler.text);
+            callback(rankDatas.ToList());
+        }
     }
 
     public void InsertRank(RankData rankData, Action callback)

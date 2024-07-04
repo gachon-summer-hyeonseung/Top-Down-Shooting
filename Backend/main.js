@@ -18,7 +18,9 @@ router.get('/rank', async (ctx) => {
   const { page, limit } = ctx.request.query;
   const result = await db.collection("rank").find().sort({ score: -1, stage: 1, playTime: 1 }).skip((parseInt(page) - 1) * parseInt(limit)).limit(parseInt(limit)).toArray();
 
-  ctx.body = result;
+  ctx.body = {
+    items: result,
+  };
 })
 
 router.post('/rank', async (ctx) => {

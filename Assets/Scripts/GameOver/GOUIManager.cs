@@ -28,6 +28,7 @@ public class GOUIManager : MonoBehaviour
 
     public void Register()
     {
+        if (string.IsNullOrEmpty(nameInput.text)) return;
         GameManager.Instance.Register(nameInput.text);
     }
 }
