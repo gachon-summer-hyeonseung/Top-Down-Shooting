@@ -100,8 +100,8 @@ public class GameManager : MonoBehaviour
             {
                 name = name,
                 score = point,
-                rank = 0,
-                time = (int)playTime
+                stage = stage,
+                playTime = (int)playTime
             },
             () =>
             {

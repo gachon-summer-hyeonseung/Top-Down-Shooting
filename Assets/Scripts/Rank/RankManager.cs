@@ -2,13 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
+[Serializable]
 public struct RankData
 {
     public string name;
     public int score;
-    public int rank;
-    public int time;
+    public int stage;
+    public int playTime;
 }
 
 public class RankManager : MonoBehaviour
@@ -30,8 +32,28 @@ public class RankManager : MonoBehaviour
 
     public IEnumerator IEInsertRank(RankData rankData, Action callback)
     {
-        yield return null;
-        Debug.Log("Insert Rank Coroutine");
-        callback();
+        string json = RankDataToJson(rankData);
+        var req = new UnityWebRequest("http://localhost:3000/rank", "POST");
+        byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
+        req.uploadHandler = new UploadHandlerRaw(jsonToSend);
+        req.downloadHandler = new DownloadHandlerBuffer();
+        req.SetRequestHeader("Content-Type", "application/json");
+
+        yield return req.SendWebRequest();
+
+        if (req.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log("Error While Sending: " + req.error);
+        }
+        else
+        {
+            Debug.Log("Received: " + req.downloadHandler.text);
+            callback();
+        }
+    }
+
+    string RankDataToJson(RankData rankData)
+    {
+        return JsonUtility.ToJson(rankData);
     }
 }
