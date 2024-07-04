@@ -190,3 +190,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idName: Enemy_1
   health: 2
+  point: 10

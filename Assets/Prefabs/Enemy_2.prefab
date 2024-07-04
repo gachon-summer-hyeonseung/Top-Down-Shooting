@@ -191,6 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idName: Enemy_2
   health: 3
+  point: 50
 --- !u!114 &8898568184859096669
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -54,6 +54,7 @@ public class EnemyManager : MonoBehaviour
 
     public void EnemyDead(Enemy enemy)
     {
+        GameManager.Instance.AddPoint(enemy.GetPoint());
         PoolManager.Instance.ReturnByType(enemy.idName, enemy);
         StageManager.Instance.ReduceEnemyCount();
     }

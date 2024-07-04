@@ -51,6 +51,14 @@ public class StageManager : MonoBehaviour
 
     public void BossDead()
     {
-        StartStage(currentStageData.stageId + 1);
+        GameManager.Instance.AddPoint(1000);
+        if (currentStageData.stageId == 100) GameManager.Instance.GameClear();
+        else
+            StartStage(currentStageData.stageId + 1);
+    }
+
+    public StageData GetCurrentStage()
+    {
+        return currentStageData;
     }
 }

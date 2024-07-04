@@ -6,9 +6,15 @@ public class Enemy : MonoBehaviour, IPoolObject
 {
     public string idName;
     [SerializeField] private int health = 2;
+    [SerializeField] private int point;
 
     private EnemyMovement enemyMovement;
     private int m_health;
+
+    public int GetPoint()
+    {
+        return point;
+    }
 
     public void SetPosition(Vector3 position)
     {
