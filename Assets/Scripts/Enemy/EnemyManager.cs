@@ -8,10 +8,22 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] private float spawnRange = 2.0f;
 
+    private GameObject player;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        player = GameObject.Find("Player");
+    }
+
+    public GameObject GetTarget()
+    {
+        return player;
     }
 
     public void StartSpawnEnemy(StageEnemyData enemyData)
