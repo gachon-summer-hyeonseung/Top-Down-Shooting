@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -82,6 +83,11 @@ public class GameManager : MonoBehaviour
         stage = StageManager.Instance.GetCurrentStage().stageId;
     }
 
+    public void GoRank()
+    {
+        SceneManager.LoadScene("RankScene");
+    }
+
     public void GoLobby()
     {
         SceneManager.LoadScene("MainScene");
@@ -89,5 +95,18 @@ public class GameManager : MonoBehaviour
 
     public void Register(string name)
     {
+        RankManager.Instance.InsertRank(
+            new RankData
+            {
+                name = name,
+                score = point,
+                rank = 0,
+                time = (int)playTime
+            },
+            () =>
+            {
+                SceneManager.LoadScene("MainScene");
+            }
+        );
     }
 }
