@@ -11,7 +11,7 @@ app.use(bodyParser());
 
 const router = new Router();
 
-const client = new MongoClient(`mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@localhost:27017`);
+const client = new MongoClient(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/?retryWrites=true&w=majority&appName=cocoa`);
 const db = client.db("shooting");
 
 router.get('/rank', async (ctx) => {
