@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
         if (!playing) return;
         this.point += point;
         Debug.Log("Point: " + point);
+        IGUIManager.Instance.UpdateScore(this.point);
     }
 
     void UpdateStage()

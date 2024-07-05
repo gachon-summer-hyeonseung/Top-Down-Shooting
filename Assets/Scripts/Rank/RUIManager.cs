@@ -12,6 +12,7 @@ public class RUIManager : MonoBehaviour
     private int page = 1;
 
     private bool addable = true;
+    private bool waitOneFrame = false;
 
     void Start()
     {
@@ -22,7 +23,13 @@ public class RUIManager : MonoBehaviour
     {
         if (addable && scrollRect.verticalNormalizedPosition < 0.01f)
         {
+            if (waitOneFrame)
+            {
+                waitOneFrame = false;
+                return;
+            }
             AddItem();
+            waitOneFrame = true;
         }
     }
 
