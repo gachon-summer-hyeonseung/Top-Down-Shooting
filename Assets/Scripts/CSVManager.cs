@@ -23,7 +23,7 @@ public class CSVManager : MonoBehaviour
 
         List<string[]> list = new();
 
-        using (StreamReader sr = new(Path.Combine(Application.persistentDataPath, path)))
+        using (StreamReader sr = new(Path.Combine(Application.streamingAssetsPath, path)))
         {
             sr.ReadLine().Split(',');
 
@@ -38,7 +38,7 @@ public class CSVManager : MonoBehaviour
 
     public void Save(string path, List<string[]> data)
     {
-        using (StreamWriter sw = new(Path.Combine(Application.persistentDataPath, path)))
+        using (StreamWriter sw = new(Path.Combine(Application.streamingAssetsPath, path)))
         {
             foreach (string[] line in data)
                 sw.WriteLine(string.Join(",", line));

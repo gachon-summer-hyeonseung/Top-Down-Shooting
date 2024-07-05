@@ -21,7 +21,12 @@ public class StageGenerator : MonoBehaviour
 
     void Start()
     {
-        CreateStageData();
+        // // CreateStageData();
+        // if (PlayerPrefs.HasKey("StageData") == false)
+        // {
+        //     CreateStageData();
+        //     PlayerPrefs.SetInt("StageData", 1);
+        // }
     }
 
     void CreateStageData()
