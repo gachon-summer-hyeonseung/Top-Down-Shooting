@@ -31,7 +31,7 @@ public class RankManager : MonoBehaviour
 
     IEnumerator IEGetRankData(int page, int limit, Action<List<RankData>> callback)
     {
-        string url = "http://localhost:3000/rank?page=" + page + "&limit=" + limit;
+        string url = "http://shooting.eatcocoa.xyz:8080/rank?page=" + page + "&limit=" + limit;
         var req = UnityWebRequest.Get(url);
         yield return req.SendWebRequest();
 
@@ -57,7 +57,7 @@ public class RankManager : MonoBehaviour
     public IEnumerator IEInsertRank(RankData rankData, Action callback)
     {
         string json = RankDataToJson(rankData);
-        var req = new UnityWebRequest("http://localhost:3000/rank", "POST");
+        var req = new UnityWebRequest("http://shooting.eatcocoa.xyz:8080/rank", "POST");
         byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
         req.uploadHandler = new UploadHandlerRaw(jsonToSend);
         req.downloadHandler = new DownloadHandlerBuffer();
