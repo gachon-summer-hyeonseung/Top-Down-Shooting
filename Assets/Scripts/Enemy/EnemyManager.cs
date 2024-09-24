@@ -12,7 +12,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("EnemyManager Awakefddd");
+        Debug.Log("EnemyManager Awake");
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
