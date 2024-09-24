@@ -96,6 +96,7 @@ public class GameManager : MonoBehaviour
 
     public void Register(string name)
     {
+        
         RankManager.Instance.InsertRank(
             new RankData
             {
